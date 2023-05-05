@@ -1,7 +1,6 @@
 import RootLayout from "@/components/RootLayout";
 import data from "@/utils/data";
 import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/router";
 
 const ProductScreen = () => {

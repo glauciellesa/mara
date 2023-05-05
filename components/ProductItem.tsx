@@ -11,16 +11,16 @@ const ProductItem = ({ product }: ProductProps) => {
     <div className="card">
       <Link href={`/product/${product.slug}`}>
         <Image
-          className="rounded shadow"
-          src={`/img/${product.image}`}
-          width={300}
+          width={400}
           height={300}
+          className="rounded-t shadow object-cover "
+          src={`/img/${product.image}`}
           alt={`${product.name}'s picture`}
         />
       </Link>
       <div className="flex  flex-col items-center justify-center p-5 ">
         <Link href={`/product/${product.slug}`}>
-          <h2 className="text-lg capitalize">{product.name}</h2>
+          <h2 className="text-lg capitalize h-14 ">{product.name}</h2>
         </Link>
         <p className="mb-2">{product.brand}</p>
         <p className="mb-2">${product.price}</p>
