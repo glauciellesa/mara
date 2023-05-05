@@ -7,7 +7,7 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { Store } from "@/Context/StoreCartContext";
 
 const Navbar = () => {
-  const { state, dispatch }: any = useContext(Store);
+  const { state } = useContext(Store);
   const { cart } = state;
   return (
     <nav className="shadow shadow-gray-500/40 flex h-15 justify-between items-center px-4 py-2">
