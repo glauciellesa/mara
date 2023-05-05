@@ -1,4 +1,3 @@
-import ProductDescription from "@/components/ProductDescription";
 import ProductItem from "@/components/ProductItem";
 import RootLayout from "@/components/RootLayout";
 import { Product } from "@/model/Product";
