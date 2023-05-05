@@ -7,7 +7,7 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { Store } from "@/Context/StoreCartContext";
 
 const Navbar = () => {
-  const { state, dispach }: any = useContext(Store);
+  const { state, dispatch }: any = useContext(Store);
   const { cart } = state;
   return (
     <nav className="shadow shadow-gray-500/40 flex h-15 justify-between items-center px-4 py-2">
@@ -35,9 +35,7 @@ const Navbar = () => {
           <FontAwesomeIcon icon={faCartShopping} className="pr-2" />
           {cart.cartItems.length > 0 && (
             <span className="ml-1 rounded-full bg-red-600 px-2 py-1 text-xs font-bold text-white">
-              {cart.cartItems.reduce(
-                (a: number, c: { quantity: number }) => a + c.quantity
-              )}
+              {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
             </span>
           )}
         </Link>

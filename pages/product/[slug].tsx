@@ -9,7 +9,7 @@ import { useContext } from "react";
 import { Store } from "@/Context/StoreCartContext";
 
 const ProductScreen = () => {
-  const { state, dispach }: any = useContext(Store);
+  const { state, dispatch } = useContext(Store);
   const { query } = useRouter();
   const { slug } = query;
   const product = data.products.find((item) => item.slug === slug);
@@ -18,7 +18,8 @@ const ProductScreen = () => {
   }
 
   const addToCartHandler = () => {
-    dispach({ type: "CART_ADD_ITEM", payload: { ...product, quantity: 1 } });
+    dispatch({ type: "CART_ADD_ITEM", payload: { ...product, quantity: 1 } });
+    console.log(dispatch);
   };
 
   return (

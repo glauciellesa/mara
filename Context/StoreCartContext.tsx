@@ -4,14 +4,11 @@ type StoreCartProviderProps = {
   children: ReactNode;
 };
 
-export const Store = createContext([]);
+export const Store = createContext();
 
 const initialState = { cart: { cartItems: [] } };
 
-const reducer = (
-  state: { cart: { cartItems: any[] } },
-  action: { type: any; payload: any }
-) => {
+const reducer = (state, action) => {
   switch (action.type) {
     case "CART_ADD_ITEM": {
       const newItem = action.payload;
