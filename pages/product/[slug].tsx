@@ -2,6 +2,9 @@ import RootLayout from "@/components/RootLayout";
 import data from "@/utils/data";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import Link from "next/link";
 
 const ProductScreen = () => {
   console.log("teste");
@@ -13,6 +16,12 @@ const ProductScreen = () => {
   }
   return (
     <RootLayout title={product.name}>
+      <div className="pb-3">
+        <Link href="..">
+          <FontAwesomeIcon icon={faArrowLeft} className="pr-2" />
+          Back to all products
+        </Link>
+      </div>
       <div className="flex">
         <Image
           width={400}
@@ -21,13 +30,24 @@ const ProductScreen = () => {
           src={`/img/${product.image}`}
           alt={`${product.name}'s picture`}
         />
-        <p>{product.name}</p>
-        <p>Category: {product.category}</p>
-        <p>Brand: {product.brand}</p>
-        <p>
-          {product.rating} of {product.numReviews} reviews
-        </p>
-        <p>Description: {product.description}</p>
+        <div className="pl-3 font-bold">
+          <p className="capitalize">{product.name}</p>
+          <p>
+            Category: <span className="font-normal"> {product.category}</span>
+          </p>
+          <p>
+            Brand: <span className="font-normal">{product.brand}</span>
+          </p>
+          <p>
+            <span className="font-normal">{product.rating}</span> of{" "}
+            <span className="font-normal">{product.numReviews} </span>
+            reviews
+          </p>
+          <p>
+            Description:{" "}
+            <span className="font-normal">{product.description}</span>
+          </p>
+        </div>
       </div>
     </RootLayout>
   );
