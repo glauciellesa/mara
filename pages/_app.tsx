@@ -1,5 +1,7 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
+import { createContext } from "react";
+
 // import Font Awesome CSS
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { config } from "@fortawesome/fontawesome-svg-core";

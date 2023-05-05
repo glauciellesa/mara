@@ -22,7 +22,7 @@ const ProductScreen = () => {
           Back to all products
         </Link>
       </div>
-      <div className="grid md:grid-cols-4 md:gap-3">
+      <div className="grid md:grid-cols-4 md:gap-3 pb-20">
         <div className="md:col-span-2">
           <Image
             width={400}
