@@ -16,22 +16,25 @@ const ProductScreen = () => {
   }
   return (
     <RootLayout title={product.name}>
-      <div className="pb-3">
-        <Link href="..">
+      <div className="py-3">
+        <Link href="/">
           <FontAwesomeIcon icon={faArrowLeft} className="pr-2" />
           Back to all products
         </Link>
       </div>
-      <div className="flex">
-        <Image
-          width={400}
-          height={300}
-          className="rounded shadow object-cover "
-          src={`/img/${product.image}`}
-          alt={`${product.name}'s picture`}
-        />
-        <div className="pl-3 font-bold">
-          <p className="capitalize">{product.name}</p>
+      <div className="grid md:grid-cols-4 md:gap-3">
+        <div className="md:col-span-2">
+          <Image
+            width={400}
+            height={300}
+            layout="responsive"
+            className="rounded shadow object-cover "
+            src={`/img/${product.image}`}
+            alt={`${product.name}'s picture`}
+          />
+        </div>
+        <div className="pl-3 font-bold py-5">
+          <p className="capitalize text-lg">{product.name}</p>
           <p>
             Category: <span className="font-normal"> {product.category}</span>
           </p>
@@ -44,9 +47,22 @@ const ProductScreen = () => {
             reviews
           </p>
           <p>
-            Description:{" "}
-            <span className="font-normal">{product.description}</span>
+            Description:
+            <span className="font-normal"> {product.description}</span>
           </p>
+        </div>
+        <div>
+          <div className="card p-5">
+            <div className="mb-2 flex justify-between w-full">
+              <div className="font-bold">Price </div>
+              <div>${product.price}</div>
+            </div>
+            <div className="mb-2 flex justify-between w-full">
+              <div className="font-bold">Status</div>
+              <div>{product.countInStock > 0 ? "In Stock" : "Unvailable"}</div>
+            </div>
+            <button className="primary-button w-full">Add to cart</button>
+          </div>
         </div>
       </div>
     </RootLayout>
