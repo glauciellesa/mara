@@ -5,15 +5,22 @@ import { useRouter } from "next/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
+import { useContext } from "react";
+import { Store } from "@/Context/StoreCartContext";
 
 const ProductScreen = () => {
-  console.log("teste");
+  const { state, dispach }: any = useContext(Store);
   const { query } = useRouter();
   const { slug } = query;
   const product = data.products.find((item) => item.slug === slug);
   if (!product) {
     return <div>Product not found</div>;
   }
+
+  const addToCartHandler = () => {
+    dispach({ type: "CART_ADD_ITEM", payload: { ...product, quantity: 1 } });
+  };
+
   return (
     <RootLayout title={product.name}>
       <div className="py-3">
@@ -61,7 +68,12 @@ const ProductScreen = () => {
               <div className="font-bold">Status</div>
               <div>{product.countInStock > 0 ? "In Stock" : "Unvailable"}</div>
             </div>
-            <button className="primary-button w-full">Add to cart</button>
+            <button
+              onClick={addToCartHandler}
+              className="primary-button w-full"
+            >
+              Add to cart
+            </button>
           </div>
         </div>
       </div>
