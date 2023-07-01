@@ -9,7 +9,7 @@ const data = {
       brand: "Zara",
       rating: 4.5,
       numReviews: 8,
-      countInStock: 20,
+      countInStock: 2,
       description:
         "High-waist trousers with front darts. Featuring front pockets and rear false welt pockets. Wide-leg design. Front zip fly, inner button and metal hook fastening.",
     },

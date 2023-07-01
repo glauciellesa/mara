@@ -9,7 +9,7 @@ import { useContext } from "react";
 import { Store } from "@/Context/StoreCartContext";
 
 const ProductScreen = () => {
-  const { dispatch } = useContext(Store);
+  const { state, dispatch } = useContext(Store);
   const { query } = useRouter();
   const { slug } = query;
   const product = data.products.find((item) => item.slug === slug);
@@ -18,8 +18,17 @@ const ProductScreen = () => {
   }
 
   const addToCartHandler = () => {
+    const existItem = state.cart.cartItems.find((item) => {
+      return item.product.slug === product.slug;
+    });
+
+    const quantity = existItem ? existItem.quantity + 1 : 1;
+
+    if (product.countInStock < quantity) {
+      alert("Sorry. Product is out of stock");
+      return;
+    }
     dispatch({ type: "CART_ADD_ITEM", payload: { product, quantity: 1 } });
-    console.log(dispatch);
   };
 
   return (
