@@ -3,7 +3,7 @@ const data = {
     {
       name: "wide led trousers with darts",
       slug: "wide-led-trousers-with-darts",
-      category: "TROUSERS",
+      category: "Trouser",
       image: "trouser1.jpeg",
       price: 50,
       brand: "Zara",

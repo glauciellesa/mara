@@ -9,7 +9,6 @@ import { Store } from "@/Context/StoreCartContext";
 const Navbar = () => {
   const { state } = useContext(Store);
   const { cart } = state;
-  console.log("ba", cart, state);
 
   return (
     <nav className="shadow shadow-gray-500/40 flex h-15 justify-between items-center px-4 py-2">
