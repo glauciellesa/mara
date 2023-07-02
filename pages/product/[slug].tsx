@@ -45,10 +45,10 @@ const ProductScreen = () => {
       <div className="grid md:grid-cols-4 md:gap-3 pb-20">
         <div className="md:col-span-2">
           <Image
-            width={400}
-            height={300}
+            width={200}
+            height={100}
             layout="responsive"
-            className="rounded shadow object-cover "
+            className="rounded shadow object-cover w-200 "
             src={`/img/${product.image}`}
             alt={`${product.name}'s picture`}
           />

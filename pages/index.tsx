@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Store</title>
+        <title>Home</title>
       </Head>
       <div className=" grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4">
         {data.products.map((product: Product) => (

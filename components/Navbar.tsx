@@ -9,6 +9,7 @@ import { Store } from "@/Context/StoreCartContext";
 const Navbar = () => {
   const { state } = useContext(Store);
   const { cart } = state;
+
   return (
     <nav className="shadow shadow-gray-500/40 flex h-15 justify-between items-center px-4 py-2">
       <Link href="/" className="text-lg font-bold">
@@ -22,9 +23,9 @@ const Navbar = () => {
       </Link>
 
       <div>
-        <Link href="/store" className="p-2">
+        {/*    <Link href="/store" className="p-2">
           Store
-        </Link>
+        </Link> */}
         <Link href="/about" className="p-2">
           About
         </Link>

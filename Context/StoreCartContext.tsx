@@ -39,7 +39,6 @@ const reducerFn = (
               : item
           )
         : [...state.cart.cartItems, newItem];
-      console.log({ ...state, cart: { ...state.cart, cartItems } });
 
       return { ...state, cart: { ...state.cart, cartItems } };
     }

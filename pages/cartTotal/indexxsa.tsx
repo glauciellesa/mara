@@ -21,22 +21,76 @@ const Cart = () => {
   };
   const cartItems = [];
   cartItems.push(item);
-  console.log(cartItems);
 
   return (
     <>
       <Head>
-        <title>Cart</title>
+        <title>Cart Total</title>
       </Head>
 
-      <div className="flex flex-col pb-9">
+      <div className="flex flex-col pb-9 border border-gray-500/40 p-10 rounded-md">
         <h1 className=" py-10  text-3xl ">Shopping Cart</h1>
         <form className="m-2 grid grid-cols-1 md:grid-cols-12 gap-x-8">
-          <section aria-labelledby="cart-heading" className="col-span-7 ">
+          <section aria-labelledby="cart-heading" className="col-span-8 ">
             <h2 id="cart-heading" className="hidden">
               Items in your shopping cart
             </h2>
             <ul role="list" className="border-t border-t-gray-500/40">
+              <li className="flex gap-5 border-b border-b-gray-500/40 py-8">
+                <div>
+                  <Image
+                    width={150}
+                    height={75}
+                    className="rounded-t shadow object-cover "
+                    src={`/img/${cartItems[0].image}`}
+                    alt={`${cartItems[0].name}'s picture`}
+                  />
+                </div>
+                <div className="flex flex-col justify-between w-full">
+                  <div className=" flex flex-col relative gap-x-0.5">
+                    <div className="pr-12 ">
+                      <div className="pb-1.5">
+                        <h3 className="capitalize">
+                          <a href="#">{cartItems[0].name}</a>
+                        </h3>
+                      </div>
+                      <div className="capitalize font-light text-gray-500/90">
+                        {cartItems[0].category}
+                      </div>
+                      <div>
+                        <p>${cartItems[0].price}</p>
+                      </div>
+                    </div>
+                    <div className="flex flex-row justify-start">
+                      <label htmlFor="quantity-0"></label>
+                      <select
+                        name="quantity-0"
+                        id="quantity-0"
+                        className="border bg-transparent rounded-md px-3 py-1 outline-0"
+                      >
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                      </select>
+                      <div className="absolute top-0 right-0">
+                        <button type="button">
+                          <span className="hidden">Remove</span>
+                          <FontAwesomeIcon icon={faX} className="pr-2" />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <p>
+                    <FontAwesomeIcon icon={faCheck} className="pr-2" />
+                    <span>In Stock</span>
+                  </p>
+                </div>
+              </li>
               <li className="flex gap-5 border-b border-b-gray-500/40 py-8">
                 <div>
                   <Image
@@ -152,7 +206,7 @@ const Cart = () => {
           <section
             aria-labelledby="summary-heading"
             className="bg-gray-800/30 flex flex-col h-15 justify-between px-4 py-2 rounded-sm
-           col-span-5"
+           col-span-4 h-fit"
           >
             <h2 id="summary-heading" className="pt-1.5 font-bold text-lg">
               Order Summary
