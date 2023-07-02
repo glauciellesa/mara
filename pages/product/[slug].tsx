@@ -1,4 +1,3 @@
-import RootLayout from "@/components/RootLayout";
 import data from "@/utils/data";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -7,6 +6,7 @@ import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import { useContext } from "react";
 import { Store } from "@/Context/StoreCartContext";
+import Head from "next/head";
 
 const ProductScreen = () => {
   const { state, dispatch } = useContext(Store);
@@ -32,7 +32,10 @@ const ProductScreen = () => {
   };
 
   return (
-    <RootLayout title={product.name}>
+    <>
+      <Head>
+        <title>{product.name}</title>
+      </Head>
       <div className="py-3">
         <Link href="/">
           <FontAwesomeIcon icon={faArrowLeft} className="pr-2" />
@@ -87,7 +90,7 @@ const ProductScreen = () => {
           </div>
         </div>
       </div>
-    </RootLayout>
+    </>
   );
 };
 
