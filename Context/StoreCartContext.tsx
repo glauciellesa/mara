@@ -42,6 +42,12 @@ const reducerFn = (
 
       return { ...state, cart: { ...state.cart, cartItems } };
     }
+    case "CART_REMOVE_ITEM": {
+      const cartItems = state.cart.cartItems.filter(
+        (item) => item.product.slug !== action.payload.product.slug
+      );
+      return { ...state, cart: { ...state.cart, cartItems } };
+    }
     default:
       return state;
   }

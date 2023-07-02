@@ -2,10 +2,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
+import { useContext } from "react";
+import { Store } from "@/Context/StoreCartContext";
 
 const Item = ({ item }) => {
+  const { state, dispatch } = useContext(Store);
   console.log("tes", item.product);
-
+  const removeItemHandler = (item) => {
+    dispatch({ type: "CART_REMOVE_ITEM", payload: item });
+  };
   return (
     <li className="flex gap-5 border-b border-b-gray-500/40 py-8">
       <div>
@@ -49,7 +54,7 @@ const Item = ({ item }) => {
               <option value="8">8</option>
             </select>
             <div className="absolute top-0 right-0">
-              <button type="button">
+              <button type="button" onClick={() => removeItemHandler(item)}>
                 <span className="hidden">Remove</span>
                 <FontAwesomeIcon icon={faX} className="pr-2" />
               </button>
