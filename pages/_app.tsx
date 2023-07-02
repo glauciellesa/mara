@@ -12,10 +12,10 @@ config.autoAddCss = false;
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <RootLayout title="Home Page">
-      <StoreCartProvider>
+    <StoreCartProvider>
+      <RootLayout title="Home Page">
         <Component {...pageProps} />
-      </StoreCartProvider>
-    </RootLayout>
+      </RootLayout>
+    </StoreCartProvider>
   );
 }

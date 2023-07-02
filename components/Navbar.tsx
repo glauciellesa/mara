@@ -9,6 +9,7 @@ import { Store } from "@/Context/StoreCartContext";
 const Navbar = () => {
   const { state } = useContext(Store);
   const { cart } = state;
+  console.log("ba", cart, state);
 
   return (
     <nav className="shadow shadow-gray-500/40 flex h-15 justify-between items-center px-4 py-2">
@@ -34,6 +35,7 @@ const Navbar = () => {
         </Link>
         <Link href="/cart" className="p-2">
           <FontAwesomeIcon icon={faCartShopping} className="pr-2" />
+
           {cart.cartItems.length > 0 && (
             <span className="ml-1 rounded-full bg-red-600 px-2 py-1 text-xs font-bold text-white mb-6">
               {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
