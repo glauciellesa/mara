@@ -4,11 +4,16 @@ import { faX } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
 import { useContext } from "react";
 import { Store } from "@/Context/StoreCartContext";
+import { CartItem } from "@/model/CartItem";
 
-const Item = ({ item }) => {
-  const { state, dispatch } = useContext(Store);
-  console.log("tes", item.product);
-  const removeItemHandler = (item) => {
+interface ItemProps {
+  item: CartItem;
+}
+
+const Item = ({ item }: ItemProps) => {
+  const { dispatch } = useContext(Store);
+  console.log("tes", item);
+  const removeItemHandler = (item: any) => {
     dispatch({ type: "CART_REMOVE_ITEM", payload: item });
   };
   return (
