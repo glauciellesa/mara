@@ -5,7 +5,7 @@ import Link from "next/link";
 import Item from "@/components/Item";
 
 const Cart = () => {
-  const { state, dispatch } = useContext(Store);
+  const { state } = useContext(Store);
   const {
     cart: { cartItems },
   } = state;
