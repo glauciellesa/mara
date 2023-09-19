@@ -12,7 +12,7 @@ interface ItemProps {
 
 const Item = ({ item }: ItemProps) => {
   const { dispatch } = useContext(Store);
-  console.log("tes", item);
+
   const removeItemHandler = (item: any) => {
     dispatch({ type: "CART_REMOVE_ITEM", payload: item });
   };

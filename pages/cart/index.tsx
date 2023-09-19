@@ -1,15 +1,42 @@
 import Head from "next/head";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Store } from "@/Context/StoreCartContext";
 import Link from "next/link";
 import Item from "@/components/Item";
 
 const Cart = () => {
+  const [total, setTotal] = useState(0);
+  const [tax, setTax] = useState(0);
+  const [shippingValue, setShippingValue] = useState(0);
+
   const { state } = useContext(Store);
   const {
     cart: { cartItems },
   } = state;
-  console.log({ cartItems });
+
+  let valueTotal = () => {
+    let total = 0;
+    cartItems.map((currentItem) => {
+      console.log({ currentItem });
+
+      let value = currentItem.product.price;
+      total += value;
+    });
+
+    total.toFixed(2);
+    setTotal(total);
+  };
+
+  let shipping = () => {
+    let total = 5;
+    total.toFixed(2);
+    setShippingValue(total);
+  };
+
+  let taxValue = () => {
+    let total = 8.32;
+    return total.toFixed(2);
+  };
 
   return (
     <>
@@ -46,19 +73,19 @@ const Cart = () => {
               <dl className="mt-6 w-full">
                 <div className="flex justify-between border-b border-b-gray-500/40 pb-2">
                   <dt>Subtotal</dt>
-                  <dt>$99.00</dt>
+                  <dt>${total}</dt>
                 </div>
                 <div className="flex justify-between text-sm border-b border-b-gray-500/40 pb-2 pt-2">
                   <dt className="flex">
                     <span>Shipping estimate</span>
                   </dt>
-                  <dt>$5.00</dt>
+                  <dt>${shippingValue}</dt>
                 </div>
                 <div className="flex justify-between text-sm border-b border-b-gray-500/40 pb-2 pt-2">
                   <dt className="flex">
                     <span>Tax estimate</span>
                   </dt>
-                  <dt>$8.32</dt>
+                  <dt>${tax}</dt>
                 </div>
                 <div className="flex justify-between text-sm">
                   <dt>Order total</dt>
