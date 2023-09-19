@@ -1,10 +1,10 @@
 import Image from "next/image";
-import Link from "next/link";
 import React, { useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { Store } from "@/Context/StoreCartContext";
+import NavLink from "./NavLink";
 
 const Navbar = () => {
   const { state } = useContext(Store);
@@ -12,7 +12,7 @@ const Navbar = () => {
 
   return (
     <nav className="shadow shadow-gray-500/40 flex h-15 justify-between items-center px-4 py-2">
-      <Link href="/" className="text-lg font-bold">
+      <NavLink href="/" className="text-lg font-bold">
         <Image
           className="py-2 text-red"
           width={80}
@@ -20,19 +20,19 @@ const Navbar = () => {
           src="/img/logo-no-background.svg"
           alt="store's logo"
         />
-      </Link>
+      </NavLink>
 
       <div>
         {/*    <Link href="/store" className="p-2">
           Store
         </Link> */}
-        <Link href="/about" className="p-2">
+        <NavLink href="/about" className="p-2">
           About
-        </Link>
-        <Link href="/contact" className="p-2">
+        </NavLink>
+        <NavLink href="/contact" className="p-2">
           Contact
-        </Link>
-        <Link href="/cart" className="p-2">
+        </NavLink>
+        <NavLink href="/cart" className="p-2">
           <FontAwesomeIcon icon={faCartShopping} className="pr-2" />
 
           {cart.cartItems.length > 0 && (
@@ -40,10 +40,10 @@ const Navbar = () => {
               {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
             </span>
           )}
-        </Link>
-        <Link href="/login" className="p-2">
+        </NavLink>
+        <NavLink href="/login" className="p-2">
           <FontAwesomeIcon icon={faUser} className="pr-2" />
-        </Link>
+        </NavLink>
       </div>
     </nav>
   );
