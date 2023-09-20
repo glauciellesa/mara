@@ -63,7 +63,7 @@ const ProductScreen = () => {
             Brand: <span className="font-normal">{product.brand}</span>
           </p>
           <p>
-            <span className="font-normal">{product.rating}</span> of{" "}
+            <span className="font-normal">{product.rating}</span>
             <span className="font-normal">{product.numReviews} </span>
             reviews
           </p>

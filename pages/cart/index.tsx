@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { Store } from "@/Context/StoreCartContext";
 import Link from "next/link";
 import Item from "@/components/Item";
+import dynamic from "next/dynamic";
 
 const Cart = () => {
   const { state } = useContext(Store);
@@ -46,7 +47,7 @@ const Cart = () => {
             Cart is empty. <Link href="/">Go shopping</Link>
           </div>
         ) : (
-          <form className="m-2 grid gap-x-8 md:grid-cols-12 items-center ">
+          <form className="m-2 grid gap-x-8 md:grid-cols-12 ">
             <section
               aria-labelledby="cart-heading"
               className="col-span-4 md:col-span-8 "
@@ -103,4 +104,4 @@ const Cart = () => {
   );
 };
 
-export default Cart;
+export default dynamic(() => Promise.resolve(Cart), { ssr: false });

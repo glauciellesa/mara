@@ -5,6 +5,7 @@ import Image from "next/image";
 import React, { useContext, useState } from "react";
 import { Store } from "@/Context/StoreCartContext";
 import { CartItem } from "@/model/CartItem";
+import dynamic from "next/dynamic";
 
 interface ItemProps {
   item: CartItem;
@@ -112,4 +113,5 @@ const Item = ({ item }: ItemProps) => {
   );
 };
 
-export default Item;
+export default dynamic(() => Promise.resolve(Item), { ssr: false });
+//Render page just in the client side
