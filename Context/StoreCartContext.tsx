@@ -42,6 +42,22 @@ const reducerFn = (
 
       return { ...state, cart: { ...state.cart, cartItems } };
     }
+    case "CART_UPDATE_QNT": {
+      const newItem = action.payload;
+      const existItem = state.cart.cartItems.find(
+        (item) => item.product.slug === newItem.product.slug
+      );
+
+      const cartItems = existItem
+        ? state.cart.cartItems.map((item) =>
+            item.product.name === existItem.product.name
+              ? { ...newItem, quantity: item.quantity - 1 }
+              : item
+          )
+        : [...state.cart.cartItems, newItem];
+
+      return { ...state, cart: { ...state.cart, cartItems } };
+    }
     case "CART_REMOVE_ITEM": {
       const cartItems = state.cart.cartItems.filter(
         (item) => item.product.slug !== action.payload.product.slug

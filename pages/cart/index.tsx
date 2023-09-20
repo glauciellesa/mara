@@ -1,14 +1,10 @@
 import Head from "next/head";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Store } from "@/Context/StoreCartContext";
 import Link from "next/link";
 import Item from "@/components/Item";
 
 const Cart = () => {
-  const [total, setTotal] = useState(0);
-  const [tax, setTax] = useState(0);
-  const [shippingValue, setShippingValue] = useState(0);
-
   const { state } = useContext(Store);
   const {
     cart: { cartItems },
@@ -18,8 +14,9 @@ const Cart = () => {
     let total = 0;
     cartItems.map((currentItem) => {
       console.log({ currentItem });
+      console.log("compras", currentItem.quantity);
 
-      let value = currentItem.product.price;
+      let value = currentItem.product.price * currentItem.quantity;
       total += value;
     });
 

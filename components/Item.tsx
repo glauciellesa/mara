@@ -13,8 +13,6 @@ interface ItemProps {
 const Item = ({ item }: ItemProps) => {
   const [quantity, setQuantity] = useState(item.quantity);
   const { dispatch } = useContext(Store);
-  console.log(item.product);
-  console.log(item.quantity);
 
   const removeItemHandler = (item: any) => {
     dispatch({ type: "CART_REMOVE_ITEM", payload: item });
@@ -26,12 +24,15 @@ const Item = ({ item }: ItemProps) => {
     if (quantity > 1) {
       setQuantity((prev) => prev - 1);
       dispatch({
-        type: "CART_ADD_ITEM",
+        type: "CART_UPDATE_QNT",
         payload: { ...item, quantity: quantity },
       });
     } else {
       setQuantity((prev) => prev - 1);
-      dispatch({ type: "CART_REMOVE_ITEM", payload: item });
+      dispatch({
+        type: "CART_REMOVE_ITEM",
+        payload: { ...item, quantity: quantity },
+      });
     }
   };
 
@@ -73,7 +74,7 @@ const Item = ({ item }: ItemProps) => {
               {item.product.category}
             </div>
             <div>
-              <p>${item.product.price}</p>
+              <p>${item.product.price.toFixed(2)}</p>
             </div>
           </div>
           <div className="flex flex-row justify-start">
