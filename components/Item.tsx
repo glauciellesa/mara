@@ -52,7 +52,7 @@ const Item = ({ item }: ItemProps) => {
   };
 
   return (
-    <li className="flex gap-5 border-b border-b-gray-500/40 py-8">
+    <li className="flex gap-4 items-center border-b border-b-gray-500/40 py-8 mb-10 ">
       <div>
         <Image
           width={150}
@@ -78,7 +78,7 @@ const Item = ({ item }: ItemProps) => {
             </div>
           </div>
           <div className="flex flex-row justify-start">
-            <div className="flex">
+            <div className="flex my-2">
               <button
                 onClick={handleLessItem}
                 className="text-black bg-white font-bold text-sm w-6 h-6 border-none text-center"

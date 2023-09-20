@@ -39,15 +39,18 @@ const Cart = () => {
         <title>Cart Total</title>
       </Head>
 
-      <div className="flex flex-col pb-9 border border-gray-500/40 p-10 rounded-md">
+      <div className="flex flex-col pb-9 border border-gray-500/40 p-2 md:p-10 rounded-md">
         <h1 className=" py-10  text-3xl ">Shopping Cart</h1>
         {cartItems.length === 0 ? (
           <div>
             Cart is empty. <Link href="/">Go shopping</Link>
           </div>
         ) : (
-          <form className="m-2 grid grid-cols-1 md:grid-cols-12 gap-x-8">
-            <section aria-labelledby="cart-heading" className="col-span-8 ">
+          <form className="m-2 grid gap-x-8 md:grid-cols-12 items-center ">
+            <section
+              aria-labelledby="cart-heading"
+              className="col-span-4 md:col-span-8 "
+            >
               <h2 id="cart-heading" className="hidden">
                 Items in your shopping cart
               </h2>

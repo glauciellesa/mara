@@ -23,9 +23,9 @@ const Navbar = () => {
       </NavLink>
 
       <div>
-        {/*    <Link href="/store" className="p-2">
+        <NavLink href="/" className="p-2">
           Store
-        </Link> */}
+        </NavLink>
         <NavLink href="/about" className="p-2">
           About
         </NavLink>
