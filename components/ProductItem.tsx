@@ -2,6 +2,7 @@ import { Store } from "@/Context/StoreCartContext";
 import { Product } from "@/model/Product";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useContext } from "react";
 
 interface ProductProps {
@@ -10,6 +11,7 @@ interface ProductProps {
 
 const ProductItem = ({ product }: ProductProps) => {
   const { state, dispatch } = useContext(Store);
+  const router = useRouter();
 
   const addToCartHandler = (product: Product) => {
     const existItem = state.cart.cartItems.find((item) => {
@@ -23,6 +25,7 @@ const ProductItem = ({ product }: ProductProps) => {
       return;
     }
     dispatch({ type: "CART_ADD_ITEM", payload: { product, quantity: 1 } });
+    router.push("/cart");
   };
 
   return (

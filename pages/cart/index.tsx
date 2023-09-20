@@ -23,19 +23,17 @@ const Cart = () => {
       total += value;
     });
 
-    total.toFixed(2);
-    setTotal(total);
+    return total;
   };
 
-  let shipping = () => {
+  let valueShipping = () => {
     let total = 5;
-    total.toFixed(2);
-    setShippingValue(total);
+    return total;
   };
 
-  let taxValue = () => {
+  let valueTax = () => {
     let total = 8.32;
-    return total.toFixed(2);
+    return total;
   };
 
   return (
@@ -73,19 +71,19 @@ const Cart = () => {
               <dl className="mt-6 w-full">
                 <div className="flex justify-between border-b border-b-gray-500/40 pb-2">
                   <dt>Subtotal</dt>
-                  <dt>${total}</dt>
+                  <dt>${valueTotal().toFixed(2)}</dt>
                 </div>
                 <div className="flex justify-between text-sm border-b border-b-gray-500/40 pb-2 pt-2">
                   <dt className="flex">
                     <span>Shipping estimate</span>
                   </dt>
-                  <dt>${shippingValue}</dt>
+                  <dt>${valueShipping().toFixed(2)}</dt>
                 </div>
                 <div className="flex justify-between text-sm border-b border-b-gray-500/40 pb-2 pt-2">
                   <dt className="flex">
                     <span>Tax estimate</span>
                   </dt>
-                  <dt>${tax}</dt>
+                  <dt>${valueTax().toFixed(2)}</dt>
                 </div>
                 <div className="flex justify-between text-sm">
                   <dt>Order total</dt>
