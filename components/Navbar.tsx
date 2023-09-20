@@ -42,7 +42,7 @@ const Navbar = () => {
           <FontAwesomeIcon icon={faCartShopping} className="pr-2" />
 
           {cartItemsCount > 0 ? (
-            <span className="rounded-full bg-red-600 px-2 py-1 text-xs font-bold text-white">
+            <span className="rounded-full bg-red-500 px-2 py-1 text-xs font-bold text-white">
               {cartItemsCount}
             </span>
           ) : null}

@@ -4,9 +4,11 @@ import { Store } from "@/Context/StoreCartContext";
 import Link from "next/link";
 import Item from "@/components/Item";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/router";
 
 const Cart = () => {
   const { state } = useContext(Store);
+  let router = useRouter();
   const {
     cart: { cartItems },
   } = state;
@@ -92,7 +94,11 @@ const Cart = () => {
                 </div>
               </dl>
               <div className="w-11/12 m-7">
-                <button className="primary-button w-full" type="submit">
+                <button
+                  className="primary-button w-full"
+                  type="submit"
+                  onClick={() => router.push("login?redirect=/shipping")}
+                >
                   Checkout
                 </button>
               </div>
