@@ -37,13 +37,17 @@ const Item = ({ item }: ItemProps) => {
 
   const handleMoreItem = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    if (quantity < item.product.countInStock) {
+
+    if (quantity >= item.product.countInStock) {
+      alert("Sorry. Product is out of stock");
+      return;
+    } else {
       setQuantity((prev) => prev + 1);
+      dispatch({
+        type: "CART_ADD_ITEM",
+        payload: { ...item, quantity: quantity },
+      });
     }
-    dispatch({
-      type: "CART_ADD_ITEM",
-      payload: { ...item, quantity: quantity },
-    });
   };
 
   return (
