@@ -14,9 +14,7 @@ const NavLink = (props: NavLinkProps) => {
       <Link
         href={props.href}
         className={
-          router.pathname == props.href
-            ? "underline underline-offset-4 font-bold"
-            : props.className
+          router.pathname == props.href ? "font-bold" : props.className
         }
       >
         {props.children}

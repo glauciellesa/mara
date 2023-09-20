@@ -35,7 +35,7 @@ const reducerFn = (
       const cartItems = existItem
         ? state.cart.cartItems.map((item) =>
             item.product.name === existItem.product.name
-              ? { ...newItem, quantity: item.quantity + newItem.quantity }
+              ? { ...newItem, quantity: item.quantity + 1 }
               : item
           )
         : [...state.cart.cartItems, newItem];

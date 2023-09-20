@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
-import { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Store } from "@/Context/StoreCartContext";
 import { CartItem } from "@/model/CartItem";
 
@@ -11,11 +11,41 @@ interface ItemProps {
 }
 
 const Item = ({ item }: ItemProps) => {
+  const [quantity, setQuantity] = useState(item.quantity);
   const { dispatch } = useContext(Store);
+  console.log(item.product);
+  console.log(item.quantity);
 
   const removeItemHandler = (item: any) => {
     dispatch({ type: "CART_REMOVE_ITEM", payload: item });
   };
+
+  const handleLessItem = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    if (quantity > 1) {
+      setQuantity((prev) => prev - 1);
+      dispatch({
+        type: "CART_ADD_ITEM",
+        payload: { ...item, quantity: quantity },
+      });
+    } else {
+      setQuantity((prev) => prev - 1);
+      dispatch({ type: "CART_REMOVE_ITEM", payload: item });
+    }
+  };
+
+  const handleMoreItem = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if (quantity < item.product.countInStock) {
+      setQuantity((prev) => prev + 1);
+    }
+    dispatch({
+      type: "CART_ADD_ITEM",
+      payload: { ...item, quantity: quantity },
+    });
+  };
+
   return (
     <li className="flex gap-5 border-b border-b-gray-500/40 py-8">
       <div>
@@ -43,21 +73,23 @@ const Item = ({ item }: ItemProps) => {
             </div>
           </div>
           <div className="flex flex-row justify-start">
-            <label htmlFor="quantity-0"></label>
-            <select
-              name="quantity-0"
-              id="quantity-0"
-              className="border bg-transparent rounded-md px-3 py-1 outline-0"
-            >
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
-            </select>
+            <div className="flex">
+              <button
+                onClick={handleLessItem}
+                className="text-black bg-white font-bold text-sm w-6 h-6 border-none text-center"
+              >
+                -
+              </button>
+              <p className="bg-gray-500/90 w-6 h-6 bg-black border border-gray-500/90 text-center">
+                {quantity}
+              </p>
+              <button
+                onClick={handleMoreItem}
+                className="text-black bg-white font-bold w-6 h-6 border-none text-center"
+              >
+                +
+              </button>
+            </div>
             <div className="absolute top-0 right-0">
               <button type="button" onClick={() => removeItemHandler(item)}>
                 <span className="hidden">Remove</span>
