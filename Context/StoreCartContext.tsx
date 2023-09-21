@@ -77,7 +77,7 @@ const reducerFn = (
   }
 };
 
-const initialState = {
+const initialState: { cart: CartItem } = {
   cart: Cookies.get("cart")
     ? JSON.parse(Cookies.get("cart"))
     : { cartItems: [] },
