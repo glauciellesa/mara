@@ -16,7 +16,7 @@ interface FormData {
 const Login = () => {
   const { data: session } = useSession();
   const router = useRouter();
-  const { redirect } = router.query;
+  const { redirect } = router.query as { redirect?: string };
 
   useEffect(() => {
     if (session?.user) {
@@ -32,7 +32,6 @@ const Login = () => {
 
   const submitHandler = async ({ email, password }: FormData) => {
     try {
-      console.log(email, password);
       const result = await signIn("credentials", {
         redirect: false,
         email,

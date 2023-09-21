@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { Store } from "@/Context/StoreCartContext";
 import Link from "next/link";
 import Item from "@/components/Item";
@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 const Cart = () => {
   const { state } = useContext(Store);
   let router = useRouter();
+
   const {
     cart: { cartItems },
   } = state;
@@ -34,6 +35,11 @@ const Cart = () => {
   let valueTax = () => {
     let total = 8.32;
     return total;
+  };
+
+  const handleLoginClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault(); // Prevent the default form submission behavior
+    router.push("/login?redirect=/shipping");
   };
 
   return (
@@ -97,7 +103,7 @@ const Cart = () => {
                 <button
                   className="primary-button w-full"
                   type="submit"
-                  onClick={() => router.push("login?redirect=/shipping")}
+                  onClick={handleLoginClick}
                 >
                   Checkout
                 </button>
