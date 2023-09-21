@@ -2,6 +2,7 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { ReactNode } from "react";
 import Head from "next/head";
+import { ToastContainer } from "react-toastify";
 
 type LayoutProps = {
   title?: string;
@@ -16,6 +17,8 @@ const RootLayout = ({ title, children }: LayoutProps) => {
         <meta name="description" content="ECommerce Website" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
+      <ToastContainer position="bottom-center" limit={1} />
       <div className=" flex min-h-screen flex-col justify-between">
         <header>
           <Navbar />
