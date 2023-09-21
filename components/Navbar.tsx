@@ -5,11 +5,14 @@ import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { Store } from "@/Context/StoreCartContext";
 import NavLink from "./NavLink";
+import { useSession } from "next-auth/react";
+import "react-toastify/dist/ReactToastify.css";
 
 const Navbar = () => {
   const { state } = useContext(Store);
   const { cart } = state;
   const [cartItemsCount, setCartItemsCount] = useState(0);
+  const { status, data: session } = useSession();
 
   //Necessary to update the product quantity in the server side
   useEffect(() => {
@@ -47,9 +50,16 @@ const Navbar = () => {
             </span>
           ) : null}
         </NavLink>
-        <NavLink href="/login" className="p-2">
-          <FontAwesomeIcon icon={faUser} className="pr-2" />
-        </NavLink>
+
+        {status === "loading" ? (
+          "Loading"
+        ) : session?.user ? (
+          session.user.name
+        ) : (
+          <NavLink href="/login" className="p-2">
+            <FontAwesomeIcon icon={faUser} className="pr-2" />
+          </NavLink>
+        )}
       </div>
     </nav>
   );

@@ -2,6 +2,8 @@ import mongoose from "mongoose";
 
 const { MONGODB_URI } = process.env;
 
+console.log({ MONGODB_URI });
+
 const connection = {
   isConnected: false,
 };

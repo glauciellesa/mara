@@ -1,8 +1,12 @@
 import Button from "@/components/Button";
 import Head from "next/head";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { signIn, useSession } from "next-auth/react";
+import { toast } from "react-toastify";
+import getError from "@/utils/error";
+import { useRouter } from "next/router";
 
 interface FormData {
   email: string;
@@ -10,7 +14,15 @@ interface FormData {
 }
 
 const Login = () => {
-  const [inputValue, setInputValue] = useState();
+  const { data: session } = useSession();
+  const router = useRouter();
+  const { redirect } = router.query;
+
+  useEffect(() => {
+    if (session?.user) {
+      router.push(redirect || "/");
+    }
+  }, [router, session, redirect]);
 
   const {
     handleSubmit,
@@ -18,8 +30,20 @@ const Login = () => {
     formState: { errors },
   } = useForm<FormData>();
 
-  const submitHandler = ({ email, password }) => {
-    console.log(email, password);
+  const submitHandler = async ({ email, password }: FormData) => {
+    try {
+      console.log(email, password);
+      const result = await signIn("credentials", {
+        redirect: false,
+        email,
+        password,
+      });
+      if (result?.error) {
+        toast.error(result.error);
+      }
+    } catch (err) {
+      toast.error(getError(err));
+    }
   };
 
   return (
