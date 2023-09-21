@@ -57,7 +57,7 @@ const Login = () => {
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
             quibusdam, similique vel minus ab necessitatibus nihil nulla
             laboriosam autem nemo temporibus harum, ut deserunt delectus, optio
-            exercitationem commodi animi. Odit!
+            exercitationem commodi animi. Odxit!
           </p>
         </div>
         <div className="grid gap-10 p-5 bg-gray-800/30 rounded-sm ">
