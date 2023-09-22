@@ -1,15 +1,22 @@
 import Image from "next/image";
 import React, { useContext, useEffect, useState } from "react";
+import Cookies from "js-cookie";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
-import { Store } from "@/Context/StoreCartContext";
-import NavLink from "./NavLink";
-import { useSession } from "next-auth/react";
+
+import { signOut, useSession } from "next-auth/react";
+
+import { Menu } from "@headlessui/react";
 import "react-toastify/dist/ReactToastify.css";
 
+import { Store } from "@/Context/StoreCartContext";
+import NavLink from "./NavLink";
+import DropdownMenu from "./DropdownMenu";
+
 const Navbar = () => {
-  const { state } = useContext(Store);
+  const { state, dispatch } = useContext(Store);
   const { cart } = state;
   const [cartItemsCount, setCartItemsCount] = useState(0);
   const { status, data: session } = useSession();
@@ -18,6 +25,12 @@ const Navbar = () => {
   useEffect(() => {
     setCartItemsCount(cart.cartItems.reduce((a, c) => a + c.quantity, 0));
   }, [cart.cartItems]);
+
+  const logoutClickHandler = () => {
+    Cookies.remove("cart");
+    dispatch({ type: "CART_RESET" });
+    signOut({ callbackUrl: "/" });
+  };
 
   return (
     <nav className="shadow shadow-gray-500/40 flex h-15 justify-between items-center px-4 py-2">
@@ -54,7 +67,32 @@ const Navbar = () => {
         {status === "loading" ? (
           "Loading"
         ) : session?.user ? (
-          session.user.name
+          <Menu as="div" className="relative inline-block">
+            <Menu.Button className="text-yellow-500">
+              {session.user.name}
+            </Menu.Button>
+            <Menu.Items className="absolute right-0 w-56 origin-top-right shadow-md bg-gray-900/70">
+              <Menu.Item>
+                <DropdownMenu className="dropdown-link" href="/profile">
+                  Profile
+                </DropdownMenu>
+              </Menu.Item>
+              <Menu.Item>
+                <DropdownMenu className="dropdown-link" href="/orderHistory">
+                  Order History
+                </DropdownMenu>
+              </Menu.Item>
+              <Menu.Item>
+                <a
+                  className="dropdown-link"
+                  href="#"
+                  onClick={logoutClickHandler}
+                >
+                  Logout
+                </a>
+              </Menu.Item>
+            </Menu.Items>
+          </Menu>
         ) : (
           <NavLink href="/login" className="p-2">
             <FontAwesomeIcon icon={faUser} className="pr-2" />

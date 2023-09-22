@@ -45,3 +45,7 @@ select,
 textarea {
   @apply rounded border p-2 outline-none ring-gray-400 focus:ring-1;
 }
+
+.dropdown-link {
+  @apply flex p-2 hover:bg-gray-200 hover:text-black;
+}

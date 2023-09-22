@@ -13,7 +13,7 @@ type StoreProps = {
   };
   dispatch: Dispatch<{
     type: string;
-    payload: CartItem;
+    payload?: CartItem;
   }>;
 };
 
@@ -72,6 +72,15 @@ const reducerFn = (
 
       return { ...state, cart: { ...state.cart, cartItems } };
     }
+    case "CART_RESET":
+      return {
+        ...state,
+        cart: {
+          cartItems: [],
+          shippingAddress: { location: {} },
+          paymentMethod: "",
+        },
+      };
     default:
       return state;
   }
