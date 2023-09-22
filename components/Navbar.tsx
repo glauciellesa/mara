@@ -28,7 +28,12 @@ const Navbar = () => {
 
   const logoutClickHandler = () => {
     Cookies.remove("cart");
-    dispatch({ type: "CART_RESET" });
+    dispatch({
+      type: "CART_RESET",
+      // eslint-disable-next-line no-undef
+      payload: { quantity: 0, product: undefined },
+    });
+
     signOut({ callbackUrl: "/" });
   };
 

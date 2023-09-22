@@ -40,15 +40,20 @@ const Item = ({ item }: ItemProps) => {
   const handleMoreItem = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
-    if (quantity >= item.product.countInStock) {
-      alert("Sorry. Product is out of stock");
-      return;
+    if (item.product?.countInStock) {
+      if (quantity >= item.product.countInStock) {
+        alert("Sorry. Product is out of stock");
+        return;
+      } else {
+        setQuantity((prev) => prev + 1);
+        dispatch({
+          type: "CART_ADD_ITEM",
+          payload: { ...item, quantity: quantity },
+        });
+      }
     } else {
-      setQuantity((prev) => prev + 1);
-      dispatch({
-        type: "CART_ADD_ITEM",
-        payload: { ...item, quantity: quantity },
-      });
+      alert("Sorry. Product no longer in stock");
+      return;
     }
   };
 
@@ -59,8 +64,8 @@ const Item = ({ item }: ItemProps) => {
           width={150}
           height={75}
           className="rounded-t shadow object-cover "
-          src={`/img/${item.product.image}`}
-          alt={`${item.product.name}'s picture`}
+          src={`/img/${item.product?.image}`}
+          alt={`${item.product?.name}'s picture`}
         />
       </div>
       <div className="flex flex-col justify-between w-full">
@@ -68,14 +73,14 @@ const Item = ({ item }: ItemProps) => {
           <div className="pr-12 ">
             <div className="pb-1.5">
               <h3 className="capitalize">
-                <a href="#">{item.product.name}</a>
+                <a href="#">{item.product?.name}</a>
               </h3>
             </div>
             <div className="capitalize font-light text-gray-500/90">
-              {item.product.category}
+              {item.product?.category}
             </div>
             <div>
-              <p>${item.product.price.toFixed(2)}</p>
+              <p>${item.product?.price.toFixed(2)}</p>
             </div>
           </div>
           <div className="flex flex-row justify-start">

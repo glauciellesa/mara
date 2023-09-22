@@ -13,7 +13,7 @@ const ProductItem = ({ product }: ProductProps) => {
 
   const addToCartHandler = (product: Product) => {
     const existItem = state.cart.cartItems.find((item) => {
-      return item.product.slug === product.slug;
+      return item.product?.slug === product.slug;
     });
 
     const quantity = existItem ? existItem.quantity + 1 : 1;

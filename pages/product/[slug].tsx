@@ -20,6 +20,7 @@ const ProductScreen = () => {
 
   const addToCartHandler = () => {
     const existItem = state.cart.cartItems.find((item) => {
+      if (!item.product) return;
       return item.product.slug === product.slug;
     });
 

@@ -6,26 +6,12 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { JWT } from "next-auth/jwt";
 import { Session } from "next-auth";
 
-interface UserForm {
-  _id: string;
-  name: string;
-  email: string;
-  image: string;
-  isAdmin: boolean;
-}
-
 export default NextAuth({
   session: {
     strategy: "jwt",
   },
   callbacks: {
-    jwt: async ({
-      token,
-      user,
-    }: {
-      token: JWT;
-      user: UserForm;
-    }): Promise<JWT> => {
+    jwt: async function ({ token, user }: any): Promise<JWT> {
       if (user?._id) token._id = user._id;
       if (user?.isAdmin) token.isAdmin = user.isAdmin;
       return token;
@@ -44,23 +30,26 @@ export default NextAuth({
   },
   providers: [
     CredentialsProvider({
+      type: "credentials",
+      credentials: {},
       authorize: async (credentials) => {
+        const { email, password } = credentials as {
+          email: string;
+          password: string;
+        };
         await db.connect();
 
-        const user = await User.findOne({ email: credentials?.email });
+        const user = await User.findOne({ email: email });
         await db.disconect();
 
-        if (
-          user &&
-          bcryptjs.compareSync(credentials?.password, user.password)
-        ) {
+        if (user && bcryptjs.compareSync(password, user.password)) {
           return {
             _id: user._id,
             name: user.name,
             email: user.email,
             image: user.image,
             isAdmin: user.isAdmin,
-          };
+          } as any;
         }
         throw new Error("Invalid email or password");
       },

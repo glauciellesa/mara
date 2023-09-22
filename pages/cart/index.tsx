@@ -16,13 +16,14 @@ const Cart = () => {
 
   let valueTotal = () => {
     let total = 0;
-    cartItems.map((currentItem) => {
+    for (const currentItem of cartItems) {
       console.log({ currentItem });
       console.log("compras", currentItem.quantity);
-
-      let value = currentItem.product.price * currentItem.quantity;
-      total += value;
-    });
+      if (currentItem.product) {
+        let value = currentItem.product.price * currentItem.quantity;
+        total += value;
+      }
+    }
 
     return total;
   };
@@ -64,9 +65,11 @@ const Cart = () => {
                 Items in your shopping cart
               </h2>
               <ul role="list" className="border-t border-t-gray-500/40">
-                {cartItems.map((currentItem) => (
-                  <Item key={currentItem.product.slug} item={currentItem} />
-                ))}
+                {cartItems.map((currentItem) =>
+                  currentItem.product ? (
+                    <Item key={currentItem.product.slug} item={currentItem} />
+                  ) : null
+                )}
               </ul>
             </section>
             <section

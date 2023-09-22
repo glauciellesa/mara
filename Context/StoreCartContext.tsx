@@ -13,12 +13,12 @@ type StoreProps = {
   };
   dispatch: Dispatch<{
     type: string;
-    payload?: CartItem;
+    payload: CartItem;
   }>;
 };
 
 export const Store = createContext({
-  state: { cart: { cartItems: [] } },
+  state: { cart: { cartItems: [] as CartItem[] } },
   dispatch: () => null,
 } as StoreProps);
 
@@ -30,12 +30,12 @@ const reducerFn = (
     case "CART_ADD_ITEM": {
       const newItem = action.payload;
       const existItem = state.cart.cartItems.find(
-        (item) => item.product.slug === newItem.product.slug
+        (item) => item.product?.slug === newItem.product?.slug
       );
 
       const cartItems = existItem
         ? state.cart.cartItems.map((item) =>
-            item.product.name === existItem.product.name
+            item.product?.name === existItem.product?.name
               ? { ...newItem, quantity: item.quantity + 1 }
               : item
           )
@@ -48,12 +48,12 @@ const reducerFn = (
     case "CART_UPDATE_QNT": {
       const newItem = action.payload;
       const existItem = state.cart.cartItems.find(
-        (item) => item.product.slug === newItem.product.slug
+        (item) => item.product?.slug === newItem.product?.slug
       );
 
       const cartItems = existItem
         ? state.cart.cartItems.map((item) =>
-            item.product.name === existItem.product.name
+            item.product?.name === existItem.product?.name
               ? { ...newItem, quantity: item.quantity - 1 }
               : item
           )
@@ -65,7 +65,7 @@ const reducerFn = (
     }
     case "CART_REMOVE_ITEM": {
       const cartItems = state.cart.cartItems.filter(
-        (item) => item.product.slug !== action.payload.product.slug
+        (item) => item.product?.slug !== action.payload.product?.slug
       );
 
       Cookies.set("cart", JSON.stringify({ ...state.cart, cartItems }));
@@ -86,10 +86,16 @@ const reducerFn = (
   }
 };
 
-const initialState: { cart: CartItem } = {
-  cart: Cookies.get("cart")
-    ? JSON.parse(Cookies.get("cart"))
-    : { cartItems: [] },
+const getCartFromCookie = () => {
+  const cart = Cookies.get("cart");
+  if (cart) {
+    return JSON.parse(cart);
+  }
+  return { cartItems: [] };
+};
+
+const initialState: { cart: Cart } = {
+  cart: getCartFromCookie(),
 };
 
 export function StoreCartProvider({ children }: StoreCartProviderProps) {
