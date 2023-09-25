@@ -52,7 +52,7 @@ const Login = () => {
       </Head>
       <div className="grid gap-14 grid-cols-1 items-center sm:grid-cols-2 shadow-lg border border-gray-500/40 p-10 rounded-md">
         <div className="grid gap-4 h-fit p-2">
-          <p className="p-2 text-6xl">Welcome!</p>
+          <p className="p-2 text-6xl ">Welcome!</p>
           <p className="p-2">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
             quibusdam, similique vel minus ab necessitatibus nihil nulla
@@ -108,7 +108,9 @@ const Login = () => {
           </form>
           <div className="mb-4">
             Don&apos;t have an accaunt? &nbsp;
-            <Link href="register">Register</Link>
+            <Link href="register" className="text-yellow-500">
+              Register
+            </Link>
           </div>
         </div>
       </div>
