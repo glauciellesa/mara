@@ -1,6 +1,7 @@
 import Button from "@/components/Button";
 import React from "react";
 import { useForm } from "react-hook-form";
+import repository from "@/services/userRepository";
 
 interface FormData {
   name: string;
@@ -15,8 +16,8 @@ const Register = () => {
     formState: { errors },
   } = useForm<FormData>();
 
-  const submitHandler = ({ name, email, password }: FormData) => {
-    console.log({ name }, { email }, { password });
+  const submitHandler = async ({ name, email, password }: FormData) => {
+    /*  await repository.insertUser({ name, email, password }); */
   };
 
   return (

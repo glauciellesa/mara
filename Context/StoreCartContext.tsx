@@ -13,7 +13,7 @@ type StoreProps = {
   };
   dispatch: Dispatch<{
     type: string;
-    payload: CartItem;
+    payload: any;
   }>;
 };
 
@@ -45,6 +45,7 @@ const reducerFn = (
 
       return { ...state, cart: { ...state.cart, cartItems } };
     }
+
     case "CART_UPDATE_QNT": {
       const newItem = action.payload;
       const existItem = state.cart.cartItems.find(
@@ -63,6 +64,7 @@ const reducerFn = (
 
       return { ...state, cart: { ...state.cart, cartItems } };
     }
+
     case "CART_REMOVE_ITEM": {
       const cartItems = state.cart.cartItems.filter(
         (item) => item.product?.slug !== action.payload.product?.slug
@@ -72,6 +74,7 @@ const reducerFn = (
 
       return { ...state, cart: { ...state.cart, cartItems } };
     }
+
     case "CART_RESET":
       return {
         ...state,
@@ -79,6 +82,18 @@ const reducerFn = (
           cartItems: [],
           shippingAddress: { location: {} },
           paymentMethod: "",
+        },
+      };
+
+    case "SAVE_SHIPPING_ADDRESS":
+      return {
+        ...state,
+        cart: {
+          ...state.cart,
+          shippingAddress: {
+            ...state.cart.shippingAddress,
+            ...action.payload,
+          },
         },
       };
     default:
@@ -91,7 +106,7 @@ const getCartFromCookie = () => {
   if (cart) {
     return JSON.parse(cart);
   }
-  return { cartItems: [] };
+  return { cartItems: [], shippingAddress: {} };
 };
 
 const initialState: { cart: Cart } = {

@@ -6,21 +6,50 @@ import { StoreCartProvider } from "@/Context/StoreCartContext";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import RootLayout from "@/components/RootLayout";
-import { SessionProvider } from "next-auth/react";
+import { SessionProvider, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
+import type { NextComponentType } from "next"; //Import Component type
+
+//Add custom appProp type then use union to add it
+type CustomAppProps = AppProps & {
+  Component: NextComponentType & { auth?: boolean }; // add auth type
+};
 
 config.autoAddCss = false;
 
-export default function App({
+const App = ({
   Component,
   pageProps: { session, ...pageProps },
-}: AppProps) {
+}: CustomAppProps) => {
   return (
     <SessionProvider session={session}>
       <StoreCartProvider>
         <RootLayout title="Home Page">
-          <Component {...pageProps} />
+          {Component.auth ? (
+            <Auth>
+              <Component {...pageProps} />
+            </Auth>
+          ) : (
+            <Component {...pageProps} />
+          )}
         </RootLayout>
       </StoreCartProvider>
     </SessionProvider>
   );
-}
+};
+
+const Auth = ({ children }) => {
+  const router = useRouter();
+  const { status } = useSession({
+    required: true,
+    onUnauthenticated() {
+      router.push("/unauthorized?message=Login Required");
+    },
+  });
+  if (status === "loading") {
+    return <div>Loading...</div>;
+  }
+  return children;
+};
+
+export default App;
