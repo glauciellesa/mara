@@ -16,14 +16,19 @@ import NavLink from "./NavLink";
 import DropdownMenu from "./DropdownMenu";
 
 const Navbar = () => {
+  const [openNav, setOpenNav] = React.useState(false);
+  const [cartItemsCount, setCartItemsCount] = useState(0);
   const { state, dispatch } = useContext(Store);
   const { cart } = state;
-  const [cartItemsCount, setCartItemsCount] = useState(0);
   const { status, data: session } = useSession();
 
   //Necessary to update the product quantity in the server side
   useEffect(() => {
     setCartItemsCount(cart.cartItems.reduce((a, c) => a + c.quantity, 0));
+    window.addEventListener(
+      "resize",
+      () => window.innerWidth >= 960 && setOpenNav(false)
+    );
   }, [cart.cartItems]);
 
   const logoutClickHandler = () => {
@@ -49,60 +54,64 @@ const Navbar = () => {
         />
       </NavLink>
 
-      <div>
-        <NavLink href="/" className="p-2">
-          Store
-        </NavLink>
-        <NavLink href="/about" className="p-2">
-          About
-        </NavLink>
-        <NavLink href="/contact" className="p-2">
-          Contact
-        </NavLink>
-        <NavLink href="/cart" className="p-2">
-          <FontAwesomeIcon icon={faCartShopping} className="pr-2" />
-
-          {cartItemsCount > 0 ? (
-            <span className="rounded-full bg-red-500 px-2 py-1 text-xs font-bold text-white">
-              {cartItemsCount}
-            </span>
-          ) : null}
-        </NavLink>
-
-        {status === "loading" ? (
-          "Loading"
-        ) : session?.user ? (
-          <Menu as="div" className="relative inline-block">
-            <Menu.Button className="text-yellow-500">
-              {session.user.name}
-            </Menu.Button>
-            <Menu.Items className="absolute right-0 w-56 origin-top-right shadow-md bg-gray-900/70">
-              <Menu.Item>
-                <DropdownMenu className="dropdown-link" href="/profile">
-                  Profile
-                </DropdownMenu>
-              </Menu.Item>
-              <Menu.Item>
-                <DropdownMenu className="dropdown-link" href="/orderHistory">
-                  Order History
-                </DropdownMenu>
-              </Menu.Item>
-              <Menu.Item>
-                <a
-                  className="dropdown-link"
-                  href="#"
-                  onClick={logoutClickHandler}
-                >
-                  Logout
-                </a>
-              </Menu.Item>
-            </Menu.Items>
-          </Menu>
-        ) : (
-          <NavLink href="/login" className="p-2">
-            <FontAwesomeIcon icon={faUser} className="pr-2" />
+      <div className="flex gap-2">
+        <div className="hidden md:block">
+          <NavLink href="/" className="p-2">
+            Store
           </NavLink>
-        )}
+          <NavLink href="/about" className="p-2">
+            About
+          </NavLink>
+          <NavLink href="/contact" className="p-2">
+            Contact
+          </NavLink>
+        </div>
+        <div className="flex gap-2">
+          <NavLink href="/cart" className="p-2">
+            <FontAwesomeIcon icon={faCartShopping} className="pr-2" />
+
+            {cartItemsCount > 0 ? (
+              <span className="rounded-full bg-red-500 px-2 py-1 text-xs font-bold text-white">
+                {cartItemsCount}
+              </span>
+            ) : null}
+          </NavLink>
+
+          {status === "loading" ? (
+            "Loading"
+          ) : session?.user ? (
+            <Menu as="div" className="relative inline-block">
+              <Menu.Button className="text-yellow-500">
+                {session.user.name}
+              </Menu.Button>
+              <Menu.Items className="absolute right-0 w-56 origin-top-right shadow-md bg-gray-900/70">
+                <Menu.Item>
+                  <DropdownMenu className="dropdown-link" href="/profile">
+                    Profile
+                  </DropdownMenu>
+                </Menu.Item>
+                <Menu.Item>
+                  <DropdownMenu className="dropdown-link" href="/orderHistory">
+                    Order History
+                  </DropdownMenu>
+                </Menu.Item>
+                <Menu.Item>
+                  <a
+                    className="dropdown-link"
+                    href="#"
+                    onClick={logoutClickHandler}
+                  >
+                    Logout
+                  </a>
+                </Menu.Item>
+              </Menu.Items>
+            </Menu>
+          ) : (
+            <NavLink href="/login" className="p-2">
+              <FontAwesomeIcon icon={faUser} className="pr-2" />
+            </NavLink>
+          )}
+        </div>
       </div>
     </nav>
   );
