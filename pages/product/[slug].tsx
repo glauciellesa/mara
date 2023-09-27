@@ -10,14 +10,13 @@ import { GetServerSideProps } from "next";
 import db from "@/utils/db";
 import Product from "@/Models/Product";
 import { ParsedUrlQuery } from "querystring";
-import { ProductType } from "@/model/ProductType";
 import service from "@/services/productService";
 
 interface Params extends ParsedUrlQuery {
   slug: string;
 }
 
-const ProductScreen = (props: ProductType) => {
+const ProductScreen = (props: any) => {
   const { product } = props;
   const { state, dispatch } = useContext(Store);
   const router = useRouter();

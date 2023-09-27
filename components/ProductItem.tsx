@@ -1,17 +1,13 @@
 import { Store } from "@/Context/StoreCartContext";
-import { Product } from "@/model/ProductType";
+import { ProductType } from "@/model/ProductType";
 import Image from "next/image";
 import Link from "next/link";
 import { useContext } from "react";
 
-interface ProductProps {
-  product: Product;
-}
-
-const ProductItem = ({ product }: ProductProps) => {
+const ProductItem = ({ product }: any) => {
   const { state, dispatch } = useContext(Store);
 
-  const addToCartHandler = (product: Product) => {
+  const addToCartHandler = (product: ProductType) => {
     const existItem = state.cart.cartItems.find((item) => {
       return item.product?.slug === product.slug;
     });

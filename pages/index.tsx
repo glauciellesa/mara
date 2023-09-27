@@ -11,11 +11,13 @@ export default function Home({ products }) {
         <title>Home</title>
       </Head>
       <div className=" grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4">
-        {products.map((product: ProductType) => (
-          <div key={product.slug}>
-            <ProductItem product={product} />
-          </div>
-        ))}
+        {products
+          ? products.map((product: ProductType) => (
+              <div key={product.slug}>
+                <ProductItem product={product} />
+              </div>
+            ))
+          : null}
       </div>
     </>
   );
