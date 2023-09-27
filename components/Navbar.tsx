@@ -49,7 +49,7 @@ const Navbar = () => {
         />
       </NavLink>
 
-      <div className="flex gap-2">
+      <div className="flex gap-2 items-center">
         <div className="hidden md:block">
           <NavLink href="/" className="p-2">
             Store
