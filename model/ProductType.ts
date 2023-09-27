@@ -1,5 +1,6 @@
 export interface ProductType {
   product: {
+    _id?: any;
     name: string;
     slug: string;
     category: string;

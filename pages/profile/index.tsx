@@ -1,4 +1,7 @@
+import User from "@/Models/User";
 import Button from "@/components/Button";
+import db from "@/utils/db";
+import { GetServerSideProps } from "next";
 import { useSession } from "next-auth/react";
 import React from "react";
 import { useForm } from "react-hook-form";
@@ -64,3 +67,19 @@ const Profile = () => {
 };
 
 export default Profile;
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { params } = context;
+  console.log(params);
+
+  await db.connect();
+  const product = await User.findOne().lean();
+
+  await db.disconect();
+
+  return {
+    props: {
+      product: product ? db.convertDocToObj(product) : null,
+    },
+  };
+};

@@ -11,6 +11,7 @@ import db from "@/utils/db";
 import Product from "@/Models/Product";
 import { ParsedUrlQuery } from "querystring";
 import { ProductType } from "@/model/ProductType";
+import service from "@/services/productService";
 
 interface Params extends ParsedUrlQuery {
   slug: string;
@@ -21,7 +22,7 @@ const ProductScreen = (props: ProductType) => {
   const { state, dispatch } = useContext(Store);
   const router = useRouter();
 
-  const addToCartHandler = () => {
+  const addToCartHandler = async () => {
     const existItem = state.cart.cartItems.find((item) => {
       if (!item.product) return;
       return item.product.slug === product.slug;
@@ -29,7 +30,12 @@ const ProductScreen = (props: ProductType) => {
 
     const quantity = existItem ? existItem.quantity + 1 : 1;
 
-    if (product.countInStock < quantity) {
+    let data = await service.getProduct(product._id);
+    console.log("id", product._id);
+
+    console.log(data);
+
+    if (data.countInStock < quantity) {
       alert("Sorry. Product is out of stock");
       return;
     }

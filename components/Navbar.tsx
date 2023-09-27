@@ -61,7 +61,7 @@ const Navbar = () => {
             Contact
           </NavLink>
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-2 items-center">
           <NavLink href="/cart" className="p-2">
             <FontAwesomeIcon icon={faCartShopping} className="pr-2" />
 
