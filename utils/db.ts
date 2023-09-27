@@ -40,6 +40,13 @@ const disconect = async () => {
   }
 };
 
-const db = { connect, disconect };
+const convertDocToObj = (doc: any) => {
+  doc._id = doc._id.toString();
+  doc.createdAt = doc.createdAt.toString();
+  doc.updatedAt = doc.updatedAt.toString();
+  return doc;
+};
+
+const db = { connect, disconect, convertDocToObj };
 
 export default db;

@@ -1,5 +1,5 @@
 import { Store } from "@/Context/StoreCartContext";
-import { Product } from "@/model/Product";
+import { Product } from "@/model/ProductType";
 import Image from "next/image";
 import Link from "next/link";
 import { useContext } from "react";

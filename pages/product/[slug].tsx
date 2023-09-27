@@ -1,4 +1,3 @@
-import data from "@/utils/data";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -7,16 +6,20 @@ import Link from "next/link";
 import { useContext } from "react";
 import { Store } from "@/Context/StoreCartContext";
 import Head from "next/head";
+import { GetServerSideProps } from "next";
+import db from "@/utils/db";
+import Product from "@/Models/Product";
+import { ParsedUrlQuery } from "querystring";
+import { ProductType } from "@/model/ProductType";
 
-const ProductScreen = () => {
+interface Params extends ParsedUrlQuery {
+  slug: string;
+}
+
+const ProductScreen = (props: ProductType) => {
+  const { product } = props;
   const { state, dispatch } = useContext(Store);
   const router = useRouter();
-  const { query } = useRouter();
-  const { slug } = query;
-  const product = data.products.find((item) => item.slug === slug);
-  if (!product) {
-    return <div>Product not found</div>;
-  }
 
   const addToCartHandler = () => {
     const existItem = state.cart.cartItems.find((item) => {
@@ -97,3 +100,19 @@ const ProductScreen = () => {
 };
 
 export default ProductScreen;
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { params } = context;
+  const { slug } = params as Params;
+
+  await db.connect();
+  const product = await Product.findOne({ slug }).lean();
+
+  await db.disconect();
+
+  return {
+    props: {
+      product: product ? db.convertDocToObj(product) : null,
+    },
+  };
+};
