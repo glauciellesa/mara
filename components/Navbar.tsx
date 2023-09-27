@@ -16,7 +16,6 @@ import NavLink from "./NavLink";
 import DropdownMenu from "./DropdownMenu";
 
 const Navbar = () => {
-  const [openNav, setOpenNav] = React.useState(false);
   const [cartItemsCount, setCartItemsCount] = useState(0);
   const { state, dispatch } = useContext(Store);
   const { cart } = state;
@@ -25,10 +24,6 @@ const Navbar = () => {
   //Necessary to update the product quantity in the server side
   useEffect(() => {
     setCartItemsCount(cart.cartItems.reduce((a, c) => a + c.quantity, 0));
-    window.addEventListener(
-      "resize",
-      () => window.innerWidth >= 960 && setOpenNav(false)
-    );
   }, [cart.cartItems]);
 
   const logoutClickHandler = () => {
