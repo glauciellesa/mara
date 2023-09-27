@@ -1,17 +1,19 @@
 import { Store } from "@/Context/StoreCartContext";
 import Button from "@/components/Button";
 import CheckoutWizard from "@/components/CheckoutWizard";
+import { Address } from "@/model/Address";
 import Cookies from "js-cookie";
+import { useRouter } from "next/router";
 import React, { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 
-interface UserAddress {
+/* interface UserAddress {
   fullName: string;
   address: string;
   city: string;
   postalCode: number;
   country: string;
-}
+} */
 
 const ShippingAddress = () => {
   const {
@@ -19,18 +21,21 @@ const ShippingAddress = () => {
     handleSubmit,
     formState: { errors },
     setValue,
-  } = useForm<UserAddress>();
+  } = useForm<Address>();
 
   const { state, dispatch } = useContext(Store);
   const { cart } = state;
   const { shippingAddress } = cart;
+  const router = useRouter();
 
   useEffect(() => {
-    setValue("fullName", shippingAddress.fullName);
-    setValue("address", shippingAddress.address);
-    setValue("city", shippingAddress.city);
-    setValue("postalCode", shippingAddress.postalCode);
-    setValue("country", shippingAddress.country);
+    if (shippingAddress) {
+      setValue("fullName", shippingAddress.fullName);
+      setValue("address", shippingAddress.address);
+      setValue("city", shippingAddress.city);
+      setValue("postalCode", shippingAddress.postalCode);
+      setValue("country", shippingAddress.country);
+    }
   }, [setValue, shippingAddress]);
 
   const submitHandler = ({
@@ -39,7 +44,9 @@ const ShippingAddress = () => {
     postalCode,
     city,
     country,
-  }: UserAddress) => {
+  }: Address) => {
+    console.log("work");
+
     dispatch({
       type: "SAVE_SHIPPING_ADDRESS",
       payload: { fullName, address, postalCode, city, country },
@@ -51,6 +58,7 @@ const ShippingAddress = () => {
         shippingAddress: { fullName, address, postalCode, city, country },
       })
     );
+    router.push("/payment");
   };
 
   return (

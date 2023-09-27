@@ -38,8 +38,8 @@ const Cart = () => {
     return total;
   };
 
-  const handleLoginClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault(); // Prevent the default form submission behavior
+  const handleLoginClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault(); // Prevent the default form submission behavior
     router.push("/login?redirect=/shipping");
   };
 

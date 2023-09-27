@@ -96,6 +96,16 @@ const reducerFn = (
           },
         },
       };
+
+    case "SAVE_PAYMENT_METHOD":
+      return {
+        ...state,
+        cart: {
+          ...state.cart,
+          paymentMethod: action.payload,
+        },
+      };
+
     default:
       return state;
   }
@@ -106,7 +116,7 @@ const getCartFromCookie = () => {
   if (cart) {
     return JSON.parse(cart);
   }
-  return { cartItems: [], shippingAddress: {} };
+  return { cartItems: [], shippingAddress: null, paymentMethod: "" };
 };
 
 const initialState: { cart: Cart } = {
