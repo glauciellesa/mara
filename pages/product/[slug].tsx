@@ -31,9 +31,6 @@ const ProductScreen = (props: ProductType) => {
     const quantity = existItem ? existItem.quantity + 1 : 1;
 
     let data = await service.getProduct(product._id);
-    console.log("id", product._id);
-
-    console.log(data);
 
     if (data.countInStock < quantity) {
       alert("Sorry. Product is out of stock");
