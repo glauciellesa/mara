@@ -24,7 +24,7 @@ export const Store = createContext({
 
 const reducerFn = (
   state: { cart: Cart },
-  action: { type: string; payload: CartItem }
+  action: { type: string; payload: any }
 ) => {
   switch (action.type) {
     case "CART_ADD_ITEM": {

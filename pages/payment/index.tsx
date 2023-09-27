@@ -64,13 +64,7 @@ const Payment = () => {
           >
             Back
           </button>
-          <button
-            onClick={() => router.push("/shipping")}
-            type="button"
-            className="primary-button"
-          >
-            Next
-          </button>
+          <button className="primary-button">Next</button>
         </div>
       </form>
     </div>
