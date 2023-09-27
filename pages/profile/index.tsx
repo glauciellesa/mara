@@ -9,17 +9,16 @@ interface FormData {
 }
 
 const Profile = () => {
+  // eslint-disable-next-line no-unused-vars
   const { data: session } = useSession();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>();
-  console.log({ session });
 
-  const submitHandler = ({ name, email }: FormData) => {
-    console.log({ name });
-  };
+  // eslint-disable-next-line no-unused-vars
+  const submitHandler = ({ name, email }: FormData) => {};
 
   return (
     <>

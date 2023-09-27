@@ -1,6 +1,7 @@
 import Button from "@/components/Button";
 import React from "react";
 import { useForm } from "react-hook-form";
+// eslint-disable-next-line no-unused-vars
 import repository from "@/services/userRepository";
 
 interface FormData {
@@ -16,6 +17,7 @@ const Register = () => {
     formState: { errors },
   } = useForm<FormData>();
 
+  // eslint-disable-next-line no-unused-vars
   const submitHandler = async ({ name, email, password }: FormData) => {
     /*  await repository.insertUser({ name, email, password }); */
   };

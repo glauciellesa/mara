@@ -17,8 +17,6 @@ const Cart = () => {
   let valueTotal = () => {
     let total = 0;
     for (const currentItem of cartItems) {
-      console.log({ currentItem });
-      console.log("compras", currentItem.quantity);
       if (currentItem.product) {
         let value = currentItem.product.price * currentItem.quantity;
         total += value;

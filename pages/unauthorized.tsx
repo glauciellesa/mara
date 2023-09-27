@@ -4,8 +4,6 @@ import React from "react";
 const Unauthorized = () => {
   const router = useRouter();
   const { message } = router.query;
-  console.log(router);
-  console.log(router.query);
 
   return (
     <div>

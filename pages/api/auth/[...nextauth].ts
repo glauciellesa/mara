@@ -27,7 +27,7 @@ export default NextAuth({
       if (token?.isAdmin) session.user.isAdmin = token.isAdmin;
       return session;
     },
-  },
+  } as any,
   secret: process.env.NEXTAUTH_SECRET,
   providers: [
     CredentialsProvider({

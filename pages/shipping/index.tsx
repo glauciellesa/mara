@@ -45,8 +45,6 @@ const ShippingAddress = () => {
     city,
     country,
   }: Address) => {
-    console.log("work");
-
     dispatch({
       type: "SAVE_SHIPPING_ADDRESS",
       payload: { fullName, address, postalCode, city, country },

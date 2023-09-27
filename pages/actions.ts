@@ -1,5 +1,3 @@
-"use server";
-
 import User from "@/Models/User";
 import db from "@/utils/db";
 
@@ -18,9 +16,6 @@ const insertUser = async (data: UserData) => {
   await db.connect();
   const { insertedId } = await User.create(user);
   await db.disconect();
-
-  console.log(insertUser);
-
   return insertedId;
 };
 
